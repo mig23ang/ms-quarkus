@@ -1,4 +1,4 @@
-package org.co.mineria.dto.entity;
+package org.co.mineria.dao.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
