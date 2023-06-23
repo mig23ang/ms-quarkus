@@ -16,4 +16,5 @@ public class CotizacionDTO {
 
     private Date date;
     private BigDecimal price;
+
 }
