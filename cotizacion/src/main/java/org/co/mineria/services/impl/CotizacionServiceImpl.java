@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @ApplicationScoped
 public class CotizacionServiceImpl implements ICotizacionService {
@@ -34,15 +33,15 @@ public class CotizacionServiceImpl implements ICotizacionService {
     KafkaEvent kafkaEvent; // Evento para enviar actualizaciones de cotización a Kafka
 
     public void getActualPrice() {
-        LOG.info("Getting actual price");
+        LOG.info("Obteniendo el actual price");
         // Obtener el precio actual mediante una llamada al cliente REST
-        PriceDTO actualPriceInfo = priceClient.getPriceByPair("USD-COP");
+        PriceDTO actualPriceInfo = priceClient.getPriceByPair("USD-BRL");
 
         // Actualizar la cotización actual y enviar un evento Kafka si se realiza una actualización
         if (updateActualPrice(actualPriceInfo)) {
             kafkaEvent.sendNewEventKafka(CotizacionDTO
                     .builder()
-                    .actualPrice(new BigDecimal(actualPriceInfo.getUSDCOP().getBid()))
+                    .actualPrice(new BigDecimal(actualPriceInfo.getUSDBRL().getBid()))
                     .date(new Date())
                     .build());
         }
@@ -50,8 +49,8 @@ public class CotizacionServiceImpl implements ICotizacionService {
 
     private boolean updateActualPrice(PriceDTO actualPriceInfo) {
         // Obtener el precio actual
-        BigDecimal actualPrice = new BigDecimal(actualPriceInfo.getUSDCOP().getBid());
-        AtomicBoolean updatedPrice = new AtomicBoolean(false);
+        BigDecimal actualPrice = new BigDecimal(actualPriceInfo.getUSDBRL().getBid());
+        boolean updatedPrice = false;
 
         // Obtener todas las cotizaciones existentes en la base de datos
         List<CotizacionEntity> cotizacionEntityList = cotizacionDAO.findAll().list();
@@ -59,26 +58,26 @@ public class CotizacionServiceImpl implements ICotizacionService {
         if (cotizacionEntityList.isEmpty()) {
             // Si no hay cotizaciones existentes, guardar la cotización actual en la base de datos
             saveCotizacion(actualPriceInfo);
-            updatedPrice.set(true);
+            updatedPrice = true;
         } else {
             // Si hay cotizaciones existentes, comparar el precio actual con la última cotización guardada
             CotizacionEntity lastDollarPriceCotizacion = cotizacionEntityList.get(cotizacionEntityList.size() - 1);
             if (actualPrice.floatValue() > lastDollarPriceCotizacion.getActualPrice().floatValue()) {
                 // Si el precio actual es mayor que el último precio guardado, guardar la cotización actual
-                updatedPrice.set(true);
+                updatedPrice = true;
                 saveCotizacion(actualPriceInfo);
             }
         }
-        return updatedPrice.get();
+        return updatedPrice;
     }
 
     private void saveCotizacion(PriceDTO actualPriceInfo) {
         // Guardar una nueva cotización en la base de datos
         CotizacionEntity cotizacion = new CotizacionEntity();
         cotizacion.setDate(new Date());
-        cotizacion.setActualPrice(new BigDecimal(actualPriceInfo.getUSDCOP().getBid()));
-        cotizacion.setPctChange(actualPriceInfo.getUSDCOP().getPctChange());
-        cotizacion.setPair("USD-COP");
+        cotizacion.setActualPrice(new BigDecimal(actualPriceInfo.getUSDBRL().getBid()));
+        cotizacion.setPctChange(actualPriceInfo.getUSDBRL().getPctChange());
+        cotizacion.setPair("USD-BRL");
         cotizacionDAO.persist(cotizacion);
     }
 }

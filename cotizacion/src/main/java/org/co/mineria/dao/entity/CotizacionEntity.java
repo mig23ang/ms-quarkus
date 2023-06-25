@@ -14,8 +14,8 @@ import java.util.Date;
 public class CotizacionEntity {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Date date;
     @Column(name = "actual_price")

@@ -9,7 +9,7 @@ import lombok.extern.jackson.Jacksonized;
 @Data
 @Builder
 @AllArgsConstructor
-public class USDCO {
+public class USDBRL {
 
     public String code;
     public String codeIn;

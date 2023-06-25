@@ -15,17 +15,10 @@ public class KafkaEvent {
     Emitter<CotizacionDTO> kafkaEmitter; // Emisor para enviar eventos de cotización a Kafka
 
     public void sendNewEventKafka(CotizacionDTO cotizacionDTO) {
-        LOG.info("Sending message to Kafka: {}", cotizacionDTO);
+
+        LOG.info("Enviando mensaje con 8888888888888888888888888 Kafka: {}", cotizacionDTO);
 
         // Enviar el evento de cotización a Kafka
-        kafkaEmitter.send(cotizacionDTO)
-                .toCompletableFuture()
-                .whenComplete((result, error) -> {
-                    if (error != null) {
-                        LOG.error("Error sending message to Kafka: {}", error);
-                    } else {
-                        LOG.info("Message sent to Kafka: {}", result);
-                    }
-                });
+        kafkaEmitter.send(cotizacionDTO).toCompletableFuture().join();
     }
 }
