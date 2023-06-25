@@ -2,6 +2,7 @@ package org.co.mineria.message;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.co.mineria.dto.PropuestaDTO;
 import org.co.mineria.dto.PropuestaDetallesDTO;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
@@ -15,13 +16,13 @@ public class KafkaEvent {
 
 
     @Channel("canal-propuesta")
-    Emitter<PropuestaDetallesDTO> propuestaDetallesDTOEmitter; // Emisor para enviar eventos de cotización a Kafka
+    Emitter<PropuestaDTO> propuestaDetallesDTOEmitter; // Emisor para enviar eventos de cotización a Kafka
 
-    public void sendNewEventKafka(PropuestaDetallesDTO propuestaDetallesDTO) {
+    public void sendNewEventKafka(PropuestaDTO propuestaDTO) {
 
-        LOG.info("Enviando mensaje con en propuesta Kafka: {}" + propuestaDetallesDTO);
+        LOG.info("Enviando mensaje con en propuesta Kafka: {}" + propuestaDTO);
 
         // Enviar el evento de cotización a Kafka
-        propuestaDetallesDTOEmitter.send(propuestaDetallesDTO).toCompletableFuture().join();
+        propuestaDetallesDTOEmitter.send(propuestaDTO).toCompletableFuture().join();
     }
 }

@@ -6,9 +6,9 @@ public interface IPropuestaService {
 
     PropuestaDetallesDTO findFullPropuesta(long id);
 
-    void crearPropuesta(PropuestaDetallesDTO propuesta);
+    void crearPropuesta(PropuestaDetallesDTO propuestaDetallesDTO);
 
-    void actualizarPropuesta(PropuestaDetallesDTO propuesta);
+    void actualizarPropuesta(PropuestaDetallesDTO propuestaDetallesDTO);
 
     void eliminarPropuesta(Long id);
 }
