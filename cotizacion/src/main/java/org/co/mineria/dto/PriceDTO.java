@@ -11,5 +11,5 @@ import lombok.extern.jackson.Jacksonized;
 @AllArgsConstructor
 public class PriceDTO {
 
-    public USDCO USDCO;
+    public USDCO USDCOP;
 }

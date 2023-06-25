@@ -15,6 +15,6 @@ import java.util.Date;
 public class CotizacionDTO {
 
     private Date date;
-    private BigDecimal price;
+    private BigDecimal actualPrice;
 
 }

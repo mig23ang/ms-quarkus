@@ -1,7 +1,6 @@
 package org.co.mineria.dao.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,9 +9,8 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "cotizacion")
 @NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "cotizacion")
 public class CotizacionEntity {
 
     @Id
@@ -20,7 +18,8 @@ public class CotizacionEntity {
     private String id;
 
     private Date date;
-    private BigDecimal price;
+    @Column(name = "actual_price")
+    private BigDecimal actualPrice;
     @Column(name = "porcentaje_cambio")
     private String pctChange;
     private String pair;
