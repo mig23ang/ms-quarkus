@@ -20,10 +20,10 @@ public class KafkaEvent {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "localhost:9092");
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        properties.put("value.serializer", "org.co.mineria.message.KafkaSerializer");
+        properties.put("value.serializer", KafkaSerializer.class.getName());
         properties.put("client.id", "cotizacion-producer");
 
-        // Agrega otras propiedades si es necesario, como seguridad (SSL, SASL, etc.)
+        // Agregar otras propiedades si es necesario, como seguridad (SSL, SASL, etc.)
 
         // Crear una instancia de KafkaProducer
         this.kafkaProducer = new KafkaProducer<>(properties);
