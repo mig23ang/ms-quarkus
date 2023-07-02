@@ -29,10 +29,10 @@ public class KafkaSerializer implements Serializer<CotizacionDTO> {
             writer.write(cotizacionDTOAvro, encoder);
             encoder.flush();
             out.close();
-            LOG.info("Termina serializando CotizacionDTO con Kafka: {}", cotizacionDTO);
+            LOG.info("Termina serializando CotizacionDTO : {}", cotizacionDTO);
             return out.toByteArray();
         } catch (IOException e) {
-            LOG.error("Error serializando CotizacionDTO con Kafka: {}", cotizacionDTO);
+            LOG.error("Error serializando CotizacionDTO : {}", cotizacionDTO);
             throw new SerializationException("Error serializing CotizacionDTO", e);
         }
 
