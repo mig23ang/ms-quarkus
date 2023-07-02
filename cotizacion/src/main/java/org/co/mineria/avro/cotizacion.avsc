@@ -1,0 +1,17 @@
+{
+  "type": "record",
+  "name": "CotizacionDTOAvro",
+  "namespace": "org.co.mineria.avro",
+  "fields": [
+    {
+      "name": "date",
+      "type": ["null", "long"],
+      "default": null
+    },
+    {
+      "name": "actualPrice",
+      "type": ["null", "string"],
+      "default": null
+    }
+  ]
+}

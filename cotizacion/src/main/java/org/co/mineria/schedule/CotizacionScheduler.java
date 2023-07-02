@@ -19,7 +19,7 @@ public class CotizacionScheduler {
     @Transactional
     @Scheduled(every = "35s", identity = "cotizacion-scheduler")
     void schedule() {
-        LOG.info("Actualizando el precion desde el calendario");
+        LOG.info("Actualizando el precio desde el calendario");
         cotizacionService.getActualPrice();
     }
 }
