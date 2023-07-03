@@ -2,6 +2,7 @@ package org.co.mineria.reporte.service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import org.co.mineria.reporte.dao.contract.CotizacionDAO;
 import org.co.mineria.reporte.dao.contract.OportunidadDAO;
 import org.co.mineria.reporte.dao.entity.CotizacionEntity;
@@ -56,6 +57,7 @@ public class OportunidadSeviceimpl implements IOportunidadService {
     }
 
     @Override
+    @Transactional
     public void guardarCotiacion(CotizacionDTO cotizacionDTO) {
 
         LOG.info("Inicia guardarCotiacion en OportunidadServiceImpl");

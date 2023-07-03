@@ -19,7 +19,7 @@ public class KafkaEvent {
     @Inject
     OportunidadSeviceimpl reporteSeviceimpl;
 
-    @Incoming("canal-propuesta")
+    @Incoming("propuesta")
     @Transactional
     public void recibirPropuesta(PropuestaDTO propuestaDTO) {
 
@@ -27,7 +27,7 @@ public class KafkaEvent {
         reporteSeviceimpl.construirReporte(propuestaDTO);
     }
 
-    @Incoming("canal-cotizacion")
+    @Incoming("cotizacion")
     @Blocking
     public void recibirCotizacion(CotizacionDTO cotizacionDTO) {
 
