@@ -63,7 +63,7 @@ public class CotizacionServiceImpl implements ICotizacionService {
             // Si hay cotizaciones existentes, comparar el precio actual con la última cotización guardada
             CotizacionEntity lastDollarPriceCotizacion = cotizacionEntityList.get(cotizacionEntityList.size() - 1);
             if (actualPrice.floatValue() > lastDollarPriceCotizacion.getActualPrice().floatValue()) {
-                // Si el precio actual es mayor que el último precio guardado, guardar la cotización actual
+                // Si el precio actual es mayor o menor que el último precio guardado, guardar la cotización actual
                 updatedPrice = true;
                 saveCotizacion(actualPriceInfo);
             }
