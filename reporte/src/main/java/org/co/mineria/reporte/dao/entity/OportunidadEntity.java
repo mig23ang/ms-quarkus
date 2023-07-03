@@ -28,8 +28,8 @@ public class OportunidadEntity {
     @Column(name = "precio_tonelada")
     private BigDecimal precioPorTonelada;
 
-    @Column(name = "mejor_cotizacion_moneda")
-    private BigDecimal mejorCotizacionMoneda;
+    @Column(name = "last_dollar_cotizazcion")
+    private BigDecimal lastDollarCotizazcion;
 
 
 }
