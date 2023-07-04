@@ -1,6 +1,7 @@
 package org.co.mineria.message;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.co.mineria.dto.CotizacionDTO;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -27,6 +28,8 @@ public class KafkaEvent {
 
         // Crear una instancia de KafkaProducer
         this.kafkaProducer = new KafkaProducer<>(properties);
+
+
     }
 
     public void sendNewEventKafka(CotizacionDTO cotizacionDTO) {

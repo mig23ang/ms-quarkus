@@ -109,7 +109,7 @@
                             <goal>schema</goal>
                         </goals>
                         <configuration>
-                            <sourceDirectory>${project.basedir}/src/main/java/org/co/mineria/</sourceDirectory>
+                            <sourceDirectory>${project.basedir}/src/main/java/org/co/mineria/avro/</sourceDirectory>
                             <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
                         </configuration>
                     </execution>
